@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --bg: #0a0908;
+  --fg: #ece4d6;
+  --fg-dim: #c9b89c;
+  --hairline: rgba(236, 228, 214, 0.08);
+  --hairline-strong: rgba(236, 228, 214, 0.16);
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  background-image:
+    radial-gradient(at 0% 0%, rgba(176, 136, 66, 0.08) 0px, transparent 45%),
+    radial-gradient(at 100% 0%, rgba(201, 184, 156, 0.04) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(0, 0, 0, 0.6) 0px, transparent 60%);
+  background-attachment: fixed;
+}
+
+::selection {
+  background: rgba(201, 163, 92, 0.4);
+  color: #fff;
+}
+
+.hairline {
+  border-color: var(--hairline);
+}
+.hairline-b {
+  border-bottom: 1px solid var(--hairline);
+}
+
+/* Editorial display heading */
+.display {
+  font-family: var(--font-display), serif;
+  font-feature-settings: "ss01", "liga", "kern";
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+}
+
+/* Subtle film grain overlay */
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  mix-blend-mode: overlay;
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 3px 3px;
+  z-index: 1;
+}
+
+/* Soft horizontal line accent used between sections */
+.divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--hairline-strong) 20%,
+    var(--hairline-strong) 80%,
+    transparent
+  );
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Scrollbar polish */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201, 184, 156, 0.2) transparent;
+}
+
+/* Focus styling — premium, not default browser blue */
+:where(button, a, input, textarea, [tabindex]):focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--bg),
+    0 0 0 3px rgba(201, 163, 92, 0.7);
+  border-radius: 4px;
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
